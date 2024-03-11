@@ -1,0 +1,54 @@
+---
+const navlinks = [
+  { 
+    name: 'Inicio', 
+    href: '/' 
+  },
+  {
+    name: 'Quiénes somos',
+    href: '/quienes-somos'
+  },
+  {
+    name: 'Radio',
+    href: '/radio'
+  },
+  {
+    name: 'TV',
+    href: '/tv'
+  },
+  {
+    name: 'Cine',
+    href: '/cine'
+  },
+  {
+    name: 'Contacto',
+    href: '/contacto'
+  }
+]
+---
+
+<div class="navbar bg-white">
+  <div class="navbar-start">
+    <img src="/logo-nse.png" alt="Logo NSE Internacional"></a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1 text-black">
+      {navlinks.map((link) => (
+        <li><a href={link.href}>{link.name}</a></li>
+      ))}
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a class="btn hidden lg:flex bg-red-600 border-0 text-white">DONAR</a>
+    <div class="dropdown dropdown-left dropdown-bottom">
+      <div tabindex="0" role="button" class="btn btn-ghost text-black lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </div>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        {navlinks.map((link) => (
+          <li><a href={link.href}>{link.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
