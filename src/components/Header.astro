@@ -34,12 +34,12 @@ const navlinks = [
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 text-black">
       {navlinks.map((link) => (
-        <li><a href={link.href}>{link.name}</a></li>
+        <li><a href={link.href} class="uppercase">{link.name}</a></li>
       ))}
     </ul>
   </div>
   <div class="navbar-end">
-    <a class="btn hidden lg:flex bg-red-600 border-0 text-white">DONAR</a>
+    <a class="btn hidden lg:flex bg-red-700 hover:bg-red-800 border-0 text-white">DONAR</a>
     <div class="dropdown dropdown-left dropdown-bottom">
       <div tabindex="0" role="button" class="btn btn-ghost text-black lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
