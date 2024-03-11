@@ -1,5 +1,10 @@
 ---
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/700.css';
+
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 const { title } = Astro.props.frontmatter || Astro.props;
 ---
@@ -13,6 +18,9 @@ const { title } = Astro.props.frontmatter || Astro.props;
 	</head>
 	<body>
 		<Header />
-		<slot />
+		<main class="min-h-dvh">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>

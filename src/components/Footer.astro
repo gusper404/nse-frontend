@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<style>
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    @apply bg-secondary hover:bg-primary transition-colors;
+  }
+  .icon svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+  }
+</style>
+
+<footer class="bg-terciary py-5 md:py-10 text-black">
+  <div class="container">
+    <div class="flex gap-3 flex-col md:flex-row justify-between items-center">
+      <div>
+        <p class="text-sm">© NSE Internacional 2020. Reservados todos los derechos.</p>
+      </div>
+      <div>
+        <div class="flex justify-between items-center gap-3">
+          <a class="icon" href="https://es-la.facebook.com/nseradio/" target="_blank" rel="noopener">
+            <Icon name="facebook" />
+          </a>
+          <a class="icon" href="https://www.youtube.com/user/nsetvradio" target="_blank" rel="noopener">
+            <Icon name="youtube" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
