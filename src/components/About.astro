@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components'
+---
+<section class="my-10">
+  <div class="container">
+    <div class="grid grid-cols-2 items-center gap-10">
+      <div class="space-y-5">
+        <p>NSE (Nuestra Señora del Encuentro con Dios) Internacional es un portal de multimedia que promueve el material audiovisual de NSE TV y NSE Radio, para dar a conocer la Verdad del Evangelio y responder adecuadamente a las necesidades e intereses de los más vulnerables hoy: la familia, los pobres, los ancianos, los enfermos, los bebés por nacer, los niños y jóvenes.</p>
+        <a href="" class="btn bg-primary text-white">Saber más</a>
+      </div>
+      <div>
+        <iframe class="w-full aspect-video" width="560" height="315" src="https://www.youtube.com/embed/weLYlkLXXHM?si=wcvaLGRwvyQG_K-1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="my-10">
+  <div class="grid grid-cols-2 min-h-[500px]">
+    <div class="bg-[url('https://admin.nseinternacional.org/public/nseinternacional/assets/aj1ll5lzfbc4w4c0?key=directus-large-contain')] bg-cover bg-center">
+      <div class="p-10 grid items-end h-full bg-black/50">
+        <div>
+          <h3 class="text-white">Conformamos un equipo internacional de misioneros laicos y de colaboradores voluntarios formados en la espiritualidad del Padre Rodrigo Molina.</h3>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 h-full text-white text-center">
+      <a href='' class="bg-primary grid items-center p-5 h-[250px] group">
+        <div class="space-y-2">
+          <Icon name='radio' class='text-6xl mx-auto'/>
+          <h3 class='text-2xl font-semibold'>Radio</h3>
+          <div class="underline underline-offset-4 text-sm">Ver contenido</div>
+        </div>
+      </a>
+      <a href='' class="bg-tertiary grid items-center p-5 h-[250px] group">
+        <div class="space-y-2 text-primary">
+          <Icon name='tv' class='text-6xl mx-auto'/>
+          <h3 class='text-2xl font-semibold'>Televisión</h3>
+          <div class="underline underline-offset-4 text-sm">Ver contenido</div>
+        </div>
+      </a>
+      <a href='' class="bg-secondary grid items-center p-5 h-[250px] group">
+        <div class="space-y-2">
+          <Icon name='cine' class='text-6xl mx-auto'/>
+          <h3 class='text-2xl font-semibold'>Cine</h3>
+          <div class="underline underline-offset-4 text-sm">Ver contenido</div>
+        </div>
+      </a>
+      <div class="bg-white relative">
+        <Image 
+          src="https://admin.nseinternacional.org/public/nseinternacional/assets/1k1ptxq3r8qskswk?key=medium"
+          alt="NSE Internacional"
+          width="500"
+          height="500"
+          class="w-full h-full object-cover absolute grayscale"
+        />
+      </div>
+    </div>
+  </div>
+</section>

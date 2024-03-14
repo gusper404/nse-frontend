@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+---
+<section>
+  <swiper-container autoplay="true" pagination="true">
+    <swiper-slide class="relative">
+      <Image 
+        src="https://admin.nseinternacional.org/public/nseinternacional/assets/libdvhvfyk0o8cw0?key=slider"
+        alt="Parábolas de la Oveja y la Dracma perdidas"
+        width="1800"
+        height="550"
+      />
+      <div class="absolute top-0 left-0 w-full h-full flex items-center">
+        <div class="container">
+          <div class="max-w-[600px] space-y-5">
+            <h1 class="text-4xl font-semibold text-white drop-shadow-lg">Parábolas de la Oveja y la Dracma perdidas</h1>
+            <button class="btn bg-white border-none text-primary">Saber más</button>
+          </div>
+        </div>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+</section>
+
+<script>
+	import { register } from 'swiper/element/bundle';
+	register();
+</script>
+
+<style>
+	swiper-container {
+    width: 100%;
+    height: 100%;
+    --swiper-pagination-color: #fff;
+    --swiper-pagination-size: 10px;
+  }
+
+  swiper-slide {
+    font-size: 18px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
