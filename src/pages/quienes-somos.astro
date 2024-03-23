@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import FeaturedImage from '../assets/quienes-somos.jpeg';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Quiénes somos';
+---
+
+<BaseLayout title={title}>
+	<section class="my-10">
+		<div class="container">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+				<div>
+					<div class="sticky top-5">
+
+						<Image src={FeaturedImage} alt="Quiénes somos" class="rounded-lg shadow-xl" />
+					</div>
+				</div>
+				<div>
+					<div class="space-y-5 mx-auto max-w-[500px]">
+						<h1 class="text-3xl font-bold">{title}</h1>
+						<p>NSE (Nuestra Señora del Encuentro con Dios) Internacional es un portal de multimedia que promueve el material audiovisual de NSE TV y NSE Radio, para dar a conocer la Verdad del Evangelio y responder adecuadamente a las necesidades e intereses de los más vulnerables hoy: la familia, los pobres, los ancianos, los enfermos, los bebés por nacer, los niños y jóvenes. </p>
+						<p>Conformamos un equipo internacional de misioneros laicos y de colaboradores voluntarios formados en la espiritualidad del Padre Rodrigo Molina (+2002), inspirador de la advocación mariana de Nuestra Señora del Encuentro con Dios y promotor de obras apostólicas en el fiel seguimiento del Evangelio.</p>
+						<div>
+							<h2 class="text-2xl font-bold mb-2">Misión</h2>
+							<p>Transmitir la Verdad de Dios, fuente de amor y de vida, a través de los medios de comunicación social. Que quien conecte con nosotros, cautivado por la presencia materna de Nuestra Señora, primera Comunicadora de la Palabra, quede entusiasmado para vivir el EVANGELIO. </p>
+						</div>
+						<div>
+							<h2 class="text-2xl font-bold mb-2">Visión</h2>
+							<p>Ser una plataforma mediática óptima para dar sentido a la vida del hombre y llevarlo al encuentro con Dios de la mano de la Virgen María.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</BaseLayout>

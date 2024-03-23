@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components'
+import Card from '../components/Card.astro'
+
+const { title, cta } = Astro.props;
+const [cta_label, cta_url] = cta;
+
+const posts = [
+  {
+    id: 1,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'tv'
+  },
+  {
+    id: 2,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'cine'
+  },
+  {
+    id: 3,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'radio'
+  }
+]
+---
+
+<section class="my-10">
+    <div class="container">
+      <h2 class="text-center font-semibold text-xl md:text-2xl uppercase">{title}</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        {posts.map((post) => (
+          <Card 
+            title={post.title} 
+            image={post.image} 
+            url={post.url}
+            icon={post.type}
+          />
+        ))}
+      </div>
+
+      {cta.length > 0 && (
+        <div class="pt-4 text-right">
+          <a href={cta_url} class="font-semibold inline-flex items-center gap-1 text-secondary hover:text-primary">{cta_label} <Icon name="chevron-right" class="stroke-2" /></a>
+        </div>
+      )}
+</section>
