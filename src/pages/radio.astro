@@ -1,0 +1,69 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cards from '../components/Cards.astro';
+import Card from '../components/Card.astro';
+import Filter from '../components/Filter.astro';
+
+const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
+
+const posts = [
+  {
+    id: 1,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'tv'
+  },
+  {
+    id: 2,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'cine'
+  },
+  {
+    id: 3,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'radio'
+  },
+  {
+    id: 4,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'radio'
+  }
+]
+---
+
+<BaseLayout title={title}>
+	<section class="p-5 md:p-10 bg-primary">
+		<div class="mx-auto max-w-[600px]">
+			<div class="flex flex-col space-y-4 items-center text-white">
+				<Icon name='radio' class='text-6xl mx-auto'/>
+				<h1 class='text-2xl font-semibold'>Radio</h1>
+				<p>NSE Radio, desde 1994, bajo el amparo de la Virgen María, Nuestra Señora del Encuentro con Dios, continúa evangelizando a los oyentes del mundo de habla hispana según las enseñanzas de la Sagrada Escritura y la Tradición de la Iglesia Católica. Considera la radio como un instrumento informativo y formativo excelente para conocer la Verdad plena y amar el Bien sumo. Trabaja por ser portadora de la verdad: educar en la verdad, defender la verdad, fomentar la verdad. Tiene presencia en 7 países y cuenta con 10 estudios de grabación de radio y 7 emisoras.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="my-5">
+		<div class="container space-y-5">
+			<Filter />
+
+			<Cards>
+				{posts.map((post) => (
+					<Card 
+						title={post.title} 
+						image={post.image} 
+						url={post.url}
+						icon={post.type}
+					/>
+				))}
+			</Cards>
+		</div>
+	</section>
+</BaseLayout>

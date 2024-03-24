@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
+import Cards from '../components/Cards.astro'
 import Card from '../components/Card.astro'
 
 const { title, cta } = Astro.props;
@@ -26,15 +27,22 @@ const posts = [
     image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
     url: '',
     type: 'radio'
+  },
+  {
+    id: 4,
+    title: 'Novena a San José',
+    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
+    url: '',
+    type: 'radio'
   }
 ]
 ---
 
 <section class="my-10">
     <div class="container">
-      <h2 class="text-center font-semibold text-xl md:text-2xl uppercase">{title}</h2>
+      <h2 class="font-semibold text-xl md:text-2xl uppercase pb-5">{title}</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <Cards>
         {posts.map((post) => (
           <Card 
             title={post.title} 
@@ -43,11 +51,12 @@ const posts = [
             icon={post.type}
           />
         ))}
-      </div>
+      </Cards>
 
       {cta.length > 0 && (
         <div class="pt-4 text-right">
           <a href={cta_url} class="font-semibold inline-flex items-center gap-1 text-secondary hover:text-primary">{cta_label} <Icon name="chevron-right" class="stroke-2" /></a>
         </div>
       )}
+    </div>
 </section>

@@ -6,12 +6,15 @@ const { image, title, url, icon } = Astro.props;
 
 <div class="bg-white shadow-md rounded-lg overflow-hidden">
   <a href={url}>
-    <img class="w-full aspect-video" src={image} alt={title} />
+    <figure>
+      <img class="w-full aspect-video" src={image} alt={title} />
+    </figure>
   </a>
-  <div class="p-2 md:p-4 flex items-center space-x-2">
-    <div class="flex-none grid place-content-center rounded-full bg-slate-100 w-10 h-10">
-      <Icon name={icon} class="text-gray-800 text-xl" />
+  <div class="p-2 md:p-4">
+    <div class="inline-flex items-center gap-2 text-slate-500">
+      <Icon name={icon} />
+      <span class="text-xs uppercase">{icon === 'tv' ? 'televisión' : icon}</span>
     </div>
-    <a href="" class="font-semibold text-lg text-primary line-clamp-1">{title}</a>
+    <a href={url} class="font-semibold text-sm md:text-lg text-primary line-clamp-1">{title}</a>
   </div>
 </div>
