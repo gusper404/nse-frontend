@@ -2,40 +2,10 @@
 import { Icon } from 'astro-icon/components'
 import Cards from '../components/Cards.astro'
 import Card from '../components/Card.astro'
+import posts from '../mocks/posts'
 
 const { title, cta } = Astro.props;
 const [cta_label, cta_url] = cta;
-
-const posts = [
-  {
-    id: 1,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'tv'
-  },
-  {
-    id: 2,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'cine'
-  },
-  {
-    id: 3,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'radio'
-  },
-  {
-    id: 4,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'radio'
-  }
-]
 ---
 
 <section class="my-10">

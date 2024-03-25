@@ -1,4 +1,5 @@
 ---
+const { categories } = Astro.props
 ---
 
 <div class="join flex">
@@ -9,10 +10,10 @@
   </div>
   <div class="flex-none">
     <select class="select select-bordered join-item">
-      <option disabled selected>Categoría</option>
-      <option>Sci-fi</option>
-      <option>Drama</option>
-      <option>Action</option>
+      <option disabled selected>Filtrar</option>
+      {categories.map((category) => (
+        <option>{category}</option>
+      ))}
     </select>
   </div>
 </div>

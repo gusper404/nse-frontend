@@ -4,39 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Cards from '../components/Cards.astro';
 import Card from '../components/Card.astro';
 import Filter from '../components/Filter.astro';
+import posts from '../mocks/posts';
+import categories from '../mocks/categories';
 
 const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
 
-const posts = [
-  {
-    id: 1,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'tv'
-  },
-  {
-    id: 2,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'cine'
-  },
-  {
-    id: 3,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'radio'
-  },
-  {
-    id: 4,
-    title: 'Novena a San José',
-    image: 'https://admin.nseinternacional.org/public/nseinternacional/assets/2btaarubpekgggw8?key=medium',
-    url: '',
-    type: 'radio'
-  }
-]
 ---
 
 <BaseLayout title={title}>
@@ -52,7 +24,15 @@ const posts = [
 
 	<section class="my-5">
 		<div class="container space-y-5">
-			<Filter />
+      <div class="max-w-[600px] mx-auto">
+        <div role="tablist" class="tabs tabs-boxed">
+          <a href="/radio" role="tab" class="tab bg-secondary text-white">Radio</a>
+          <a href="/radio" role="tab" class="tab">Cine</a>
+          <a href="/radio" role="tab" class="tab">Televisión</a>
+        </div>
+      </div>
+
+			<Filter categories={categories}/>
 
 			<Cards>
 				{posts.map((post) => (

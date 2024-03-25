@@ -3,14 +3,11 @@ const navlinks = [
   ['Inicio', '/' ],
   ['Quiénes somos', '/quienes-somos' ],
   ['Radio', '/radio' ],
-  ['TV', '/tv' ],
-  ['Cine', '/cine' ],
+  ['TV', '/radio' ],
+  ['Cine', '/radio' ],
   ['Contacto', '/contacto' ]
 ]
 ---
-      <!-- {navlinks.map(([title, url]) => (
-        <li><a href={url} class="uppercase">{title}</a></li>
-      ))} -->
 
 <div class="drawer z-50">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
@@ -18,7 +15,9 @@ const navlinks = [
     <!-- Navbar -->
     <div class="w-full navbar bg-white border-b">
       <div class="flex-none">
-        <img src="/logo-nse.png" alt="Logo NSE Internacional"></a>
+        <a href="/">
+          <img src="/logo-nse.png" alt="Logo NSE Internacional"></a>
+        </a>
       </div>
       <div class="w-full">
         <div class="hidden lg:block mx-auto">
