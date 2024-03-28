@@ -10,10 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^3.1.0",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/montserrat": "^5.0.17",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.22",
     "astro": "^4.5.1",
     "astro-icon": "^1.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sharp": "^0.33.3",
     "swiper": "^11.0.7",
     "tailwindcss": "^3.4.1"
