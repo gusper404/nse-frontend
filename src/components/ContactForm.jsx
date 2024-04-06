@@ -1,38 +1,41 @@
 import React from 'react';
+import { useForm } from "react-hook-form"
 
 export default function ContactForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = (data) => console.log(data)
+
   return (
     <>
-      <div>
-        <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text font-semibold">Nombre</span>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text font-semibold">Nombre</span>
           </div>
-          <input type="text" placeholder="María Perez" class="input input-bordered w-full" />
-          <div class="label">
-            <span class="label-text-alt text-danger">Mensaje de error</span>
-          </div>
+          <input {...register('name', {required: true})} type="text" placeholder="María Perez" className="input input-bordered w-full" />
+          {errors.name && <span className="pt-1 label-text-alt text-danger">Este campo es requerido</span>}
         </label>
-        <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text font-semibold">Correo electrónico</span>
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text font-semibold">Correo electrónico</span>
           </div>
-          <input type="email" placeholder="mariaperez@gmail.com" class="input input-bordered w-full" />
-          <div class="label">
-            <span class="label-text-alt text-danger">Mensaje de error</span>
-          </div>
+          <input {...register('email', {required: true})} type="email" placeholder="mariaperez@gmail.com" className="input input-bordered w-full" />
+          {errors.email && (<span className="pt-1 label-text-alt text-danger">Este campo es requerido</span>)}
         </label>
-        <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text font-semibold">Mensaje</span>
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text font-semibold">Mensaje</span>
           </div>
-          <textarea class="textarea textarea-bordered" placeholder="Escriba su mensaje"></textarea>
-          <div class="label">
-            <span class="label-text-alt text-danger">Mensaje de error</span>
-          </div>
+          <textarea {...register('message', {required: true})} className="textarea textarea-bordered" placeholder="Escriba su mensaje"></textarea>
+          {errors.message && (<span className="pt-1 label-text-alt text-danger">Este campo es requerido</span>)}
         </label>
-        <button class="mt-2 btn bg-secondary hover:bg-primary text-white w-full">Enviar mensaje</button>
-      </div>
+        <button type='submit' className="mt-2 btn bg-secondary hover:bg-primary text-white w-full">Enviar mensaje</button>
+      </form>
     </>
   )
 }
