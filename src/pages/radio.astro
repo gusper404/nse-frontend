@@ -4,10 +4,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Cards from '../components/Cards.astro';
 import Card from '../components/Card.astro';
 import Filter from '../components/Filter.astro';
-import posts from '../mocks/posts';
+import { getYoutubeVideoThumbnail } from '../utils';
+// import posts from '../mocks/posts';
 import categories from '../mocks/categories';
 
 const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
+
+const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/radios?populate=*`);
+const { data:posts } = await response.json();
+
 
 ---
 
@@ -35,14 +40,15 @@ const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
 			<Filter categories={categories}/>
 
 			<Cards>
-				{posts.map((post) => (
-					<Card 
-						title={post.title} 
-						image={post.image} 
-						url={post.url}
-						icon={post.type}
-					/>
-				))}
+				{posts.map(({attributes:post}) => (
+						<Card 
+							title={post.title} 
+							image={getYoutubeVideoThumbnail(post.videos[0].url, 'large')} 
+							url={post.slug}
+							icon={post.type}
+						/>
+					)
+				)}
 			</Cards>
 		</div>
 	</section>

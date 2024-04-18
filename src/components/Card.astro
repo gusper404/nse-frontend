@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 
 const { image, title, url, icon } = Astro.props;
 ---
@@ -7,14 +8,16 @@ const { image, title, url, icon } = Astro.props;
 <div class="bg-white shadow-md rounded-lg overflow-hidden">
   <a href={url}>
     <figure>
-      <img class="w-full aspect-video" src={image} alt={title} />
+      <Image width={300} height={170} class="w-full aspect-video object-cover" src={image} alt={title} />
     </figure>
   </a>
   <div class="p-2 md:p-4">
-    <div class="inline-flex items-center gap-2 text-slate-500">
-      <Icon name={icon} />
-      <span class="text-xs uppercase">{icon === 'tv' ? 'televisión' : icon}</span>
-    </div>
+    {icon && (
+      <div class="inline-flex items-center gap-2 text-slate-500">
+        <Icon name={icon} />
+        <span class="text-xs uppercase">{icon === 'tv' ? 'televisión' : icon}</span>
+      </div>
+    )}
     <a href={url} class="font-semibold text-sm md:text-lg text-primary line-clamp-1">{title}</a>
   </div>
 </div>
