@@ -13,6 +13,7 @@
     "@astrojs/react": "^3.1.0",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/montserrat": "^5.0.17",
+    "@hcaptcha/react-hcaptcha": "^1.10.1",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.22",
     "astro": "^4.5.1",

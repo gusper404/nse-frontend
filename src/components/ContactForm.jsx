@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form"
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 export default function ContactForm() {
 
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+  const [token, setToken] = useState(null)
+  const captchaRef = useRef(null);
 
   const {
     register,
@@ -27,11 +30,20 @@ export default function ContactForm() {
   };
 
   const onSubmit = async (data) => {
+    if (!token) {
+      alert('Por favor, completa el captcha.');
+      return;
+    }
     setSent(false);
     setLoading(true);
     await sendEmail(data);
     reset();
     setLoading(false);
+    captchaRef.current.resetCaptcha();
+  }
+
+  const handleVerificationSuccess = (token) => {
+    setToken(token);
   }
 
   return (
@@ -58,6 +70,13 @@ export default function ContactForm() {
           <textarea {...register('message', {required: true})} className="textarea textarea-bordered" placeholder="Escriba su mensaje"></textarea>
           {errors.message && (<span className="pt-1 label-text-alt text-danger">Este campo es requerido</span>)}
         </label>
+        <div className='grid place-content-center'>
+          <HCaptcha
+            ref={captchaRef}
+            sitekey={import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY}
+            onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)}
+          />
+        </div>
         <button type='submit' disabled={loading} className="mt-2 btn bg-secondary hover:bg-primary text-white w-full">
           {loading && <span className="loading loading-spinner"></span>}
           Enviar mensaje
