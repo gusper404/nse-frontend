@@ -1,18 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Cards from '../components/Cards.astro';
-import Card from '../components/Card.astro';
-import Filter from '../components/Filter.astro';
-import { getYoutubeVideoThumbnail } from '../utils';
-// import posts from '../mocks/posts';
-import categories from '../mocks/categories';
+import BaseLayout from './BaseLayout.astro';
 
-const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
-
-const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/radios?populate=*`);
-const { data:posts } = await response.json();
-
+const { title } = Astro.props.frontmatter || Astro.props;
 
 ---
 
@@ -37,19 +27,7 @@ const { data:posts } = await response.json();
         </div>
       </div>
 
-			<Filter categories={categories}/>
-
-			<Cards>
-				{posts.map(({attributes:post}) => (
-						<Card 
-							title={post.title} 
-							image={getYoutubeVideoThumbnail(post.videos[0].url, 'large')} 
-							url={post.slug}
-							icon={post.type}
-						/>
-					)
-				)}
-			</Cards>
+			<slot />
 		</div>
 	</section>
 </BaseLayout>

@@ -1,0 +1,63 @@
+---
+import qs from 'qs'
+import RadioLayout from "../../layouts/RadioLayout.astro";
+import Cards from '../../components/Cards.astro';
+import Card from '../../components/Card.astro';
+import { getYoutubeVideoThumbnail } from '../../utils';
+
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/radios?populate=*`);
+  const { data:posts } = await response.json();
+
+  const slugs = posts.map(({attributes:post}) => {
+    return {
+      params: {slug: post.slug}
+    }
+  });
+  
+  return [...slugs];
+}
+
+const { slug } = Astro.params;
+
+const query = qs.stringify({
+    fields: ['title', 'slug'],
+    populate: {
+      videos: '*',
+      category: {
+        fields: ['name',  'slug']
+      }
+    },
+    filters: {
+      slug: {
+        $eq: slug
+      }
+    }
+  }, {
+    encodeValuesOnly: true
+  })
+
+const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/radios?${query}`);
+const { data } = await response.json();
+const post = data[0];
+---
+<RadioLayout title={post.attributes.title}>
+  <section>
+    <h1 class="text-3xl font-bold text-primary mb-5">{post.attributes.title}</h1>
+
+    <Cards>
+      {post?.attributes?.videos.map((video) => (
+          <Card 
+            title={video.title} 
+            image={getYoutubeVideoThumbnail(video.url, 'large')} 
+            url={video.url}
+            target="_blank"
+          />
+        )
+      )}
+    </Cards>
+
+    <pre>{JSON.stringify(post, null, 2)}</pre>
+  </section>
+</RadioLayout>

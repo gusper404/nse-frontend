@@ -1,0 +1,32 @@
+---
+import Cards from '../../components/Cards.astro';
+import Card from '../../components/Card.astro';
+import Filter from '../../components/Filter.astro';
+import { getYoutubeVideoThumbnail } from '../../utils';
+import categories from '../../mocks/categories';
+import RadioLayout from '../../layouts/RadioLayout.astro';
+
+const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
+
+const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/radios?populate=*`);
+const { data:posts } = await response.json();
+const PATH = 'radio';
+---
+
+<RadioLayout title={title}>
+
+	<Filter categories={categories}/>
+
+	<Cards>
+		{posts.map(({attributes:post}) => (
+				<Card 
+					title={post.title} 
+					image={getYoutubeVideoThumbnail(post.videos[0].url, 'large')} 
+					url={PATH + '/' + post.slug}
+					icon={post.type}
+				/>
+			)
+		)}
+	</Cards>
+
+</RadioLayout>
