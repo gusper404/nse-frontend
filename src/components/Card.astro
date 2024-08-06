@@ -2,13 +2,13 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
-const { image, title, url, icon, target } = Astro.props;
+const { image, imgw, imgh, title, url, icon, target } = Astro.props;
 ---
 
 <div class="bg-white shadow-md rounded-lg overflow-hidden">
   <a href={url} target={target}>
     <figure>
-      <Image width={300} height={170} class="w-full aspect-video object-cover" src={image} alt={title} />
+      <Image width={imgw} height={imgh} class="w-full aspect-video object-cover" src={image} alt={title} />
     </figure>
   </a>
   <div class="p-2 md:p-4">

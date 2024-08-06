@@ -3,8 +3,8 @@ import qs from 'qs';
 import Cards from '../../components/Cards.astro';
 import Card from '../../components/Card.astro';
 import Filter from '../../components/Filter.jsx';
-import { getYoutubeVideoThumbnail } from '../../utils';
 import RadioLayout from '../../layouts/RadioLayout.astro';
+import youtubeThumbnail from 'youtube-thumbnail';
  
 const currentUrl = Astro.url;
 const path = Astro.url.pathname;
@@ -31,18 +31,23 @@ const { data:posts } = await response.json();
 <RadioLayout title={title}>
 
 	<div class="space-y-4">
-		<Filter endpoint={endpoint} currentUrl={currentUrl} currentCategory='' client:load/>
+		<Filter data={posts} path={path} endpoint={endpoint} currentUrl={currentUrl} currentCategory='' client:load/>
 	
 		<Cards>
-			{posts.map(({attributes:post}) => (
-					<Card 
-						key={post.id}
-						title={post.title} 
-						image={getYoutubeVideoThumbnail(post.videos[0].url, 'large')} 
-						url={path + '/' + post.slug}
-						icon={post.type}
-					/>
-				)
+			{posts.map(({attributes:post}) => {
+					const { high } = youtubeThumbnail(post.videos[0].url);
+					return (
+						<Card 
+							key={post.id}
+							title={post.title} 
+							image={high.url}
+							imgw={high.width}
+							imgh={high.height}
+							url={path + '/' + post.slug}
+							icon={post.type}
+						/>
+					)
+				}
 			)}
 		</Cards>
 	</div>

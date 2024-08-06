@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import qs from 'qs';
+import Search from './Search';
 
-export default function Filter({ endpoint, currentUrl, currentCategory }) {
+export default function Filter({ endpoint, currentUrl, currentCategory, data, path }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -66,7 +67,7 @@ export default function Filter({ endpoint, currentUrl, currentCategory }) {
     <div className="join flex">
       <div className="w-full">
         <div>
-          <input className="input input-bordered join-item w-full" placeholder="Buscar" />
+          <Search data={data} path={path}/>
         </div>
       </div>
       <div className="flex-none">

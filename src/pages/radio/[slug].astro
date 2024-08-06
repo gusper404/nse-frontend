@@ -3,7 +3,7 @@ import qs from 'qs'
 import RadioLayout from "../../layouts/RadioLayout.astro";
 import Cards from '../../components/Cards.astro';
 import Card from '../../components/Card.astro';
-import { getYoutubeVideoThumbnail } from '../../utils';
+import youtubeThumbnail from 'youtube-thumbnail';
 
 
 export async function getStaticPaths() {
@@ -47,17 +47,22 @@ const post = data[0];
     <h1 class="text-3xl font-bold text-primary mb-5">{post.attributes.title}</h1>
 
     <Cards>
-      {post?.attributes?.videos.map((video) => (
-          <Card 
-            title={video.title} 
-            image={getYoutubeVideoThumbnail(video.url, 'large')} 
-            url={video.url}
-            target="_blank"
-          />
-        )
+      {post?.attributes?.videos.map((video) => {
+          const { high } = youtubeThumbnail(video.url);
+          return (
+            <Card 
+              key={video.id}
+              title={video.title} 
+              image={high.url}
+              imgw={high.width}
+              imgh={high.height}
+              url={video.slug}
+            />
+          )
+			  }
       )}
     </Cards>
 
-    <pre>{JSON.stringify(post, null, 2)}</pre>
+    <!-- <pre>{JSON.stringify(post, null, 2)}</pre> -->
   </section>
 </RadioLayout>

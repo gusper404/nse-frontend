@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import FeaturedImage from '../assets/quienes-somos.jpeg';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
 const title = 'Quiénes somos';
 ---
 
@@ -10,25 +11,42 @@ const title = 'Quiénes somos';
 		<div class="container">
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 				<div>
-					<div class="sticky top-5">
-
+					<div>
 						<Image src={FeaturedImage} alt="Quiénes somos" class="rounded-lg shadow-xl" />
 					</div>
-				</div>
-				<div>
-					<div class="space-y-5 mx-auto max-w-[500px]">
-						<h1 class="text-2xl md:text-3xl font-bold">{title}</h1>
+					<div class="space-y-5 pt-4">
+						<h1 class="text-2xl md:text-3xl font-bold text-primary">{title}</h1>
 						<p>NSE (Nuestra Señora del Encuentro con Dios) Internacional es un portal de multimedia que promueve el material audiovisual de NSE TV y NSE Radio, para dar a conocer la Verdad del Evangelio y responder adecuadamente a las necesidades e intereses de los más vulnerables hoy: la familia, los pobres, los ancianos, los enfermos, los bebés por nacer, los niños y jóvenes. </p>
 						<p>Conformamos un equipo internacional de misioneros laicos y de colaboradores voluntarios formados en la espiritualidad del Padre Rodrigo Molina (+2002), inspirador de la advocación mariana de Nuestra Señora del Encuentro con Dios y promotor de obras apostólicas en el fiel seguimiento del Evangelio.</p>
 						<div>
-							<h2 class="text-2xl font-bold mb-2">Misión</h2>
+							<h2 class="text-2xl font-bold mb-2 text-primary">Misión</h2>
 							<p>Transmitir la Verdad de Dios, fuente de amor y de vida, a través de los medios de comunicación social. Que quien conecte con nosotros, cautivado por la presencia materna de Nuestra Señora, primera Comunicadora de la Palabra, quede entusiasmado para vivir el EVANGELIO. </p>
 						</div>
 						<div>
-							<h2 class="text-2xl font-bold mb-2">Visión</h2>
+							<h2 class="text-2xl font-bold mb-2 text-primary">Visión</h2>
 							<p>Ser una plataforma mediática óptima para dar sentido a la vida del hombre y llevarlo al encuentro con Dios de la mano de la Virgen María.</p>
 						</div>
 					</div>
+				</div>
+				<div class="space-y-6">
+					<div class="space-y-2 text-primary">
+						<Icon name='radio' class='text-4xl'/>
+						<h1 class='text-2xl font-semibold'>Radio</h1>
+						<p>NSE Radio, desde 1994, bajo el amparo de la Virgen María, Nuestra Señora del Encuentro con Dios, continúa evangelizando a los oyentes del mundo de habla hispana según las enseñanzas de la Sagrada Escritura y la Tradición de la Iglesia Católica. Considera la radio como un instrumento informativo y formativo excelente para conocer la Verdad plena y amar el Bien sumo. Trabaja por ser portadora de la verdad: educar en la verdad, defender la verdad, fomentar la verdad. Tiene presencia en 7 países y cuenta con 10 estudios de grabación de radio y 7 emisoras.</p>
+					</div>
+					
+					<div class="space-y-2 text-primary">
+						<Icon name='tv' class='text-4xl'/>
+						<h1 class='text-2xl font-semibold'>Televisión</h1>
+						<p>NSE Televisión, desde el 2003, bajo el amparo de la Virgen María, Nuestra Señora del Encuentro con Dios, transmite una programación fiel al depósito de la fe contenido en la Sagrada Escritura y la Tradición de la Iglesia Católica, convencida de que la más alta calidad que puede ofrecer a su audiencia es la belleza y atractivo de la Verdad de Dios contenida en su Palabra. Tiene presencia en 3 países y cuenta con 4 estudios de grabación y 3 canales de TV.</p>
+					</div>
+					
+					<div class="space-y-2 text-primary">
+						<Icon name='cine' class='text-4xl'/>
+						<h1 class='text-2xl font-semibold'>Cine</h1>
+						<p>NSE Cine, desde el 2016, bajo el amparo de la Virgen María, Nuestra Señora del Encuentro con Dios,  trabaja por dar a conocer la Verdad de Dios, fuente de amor y de vida, según las enseñanzas de la Sagrada Escritura y la Tradición de la Iglesia Católica, para llevar a los hombres a un encuentro personal con Dios.</p>
+					</div>
+					
 				</div>
 			</div>
 
