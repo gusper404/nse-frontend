@@ -5,6 +5,19 @@ import Card from '../../components/Card.astro';
 import Filter from '../../components/Filter.jsx';
 import { getYoutubeVideoThumbnail } from '../../utils';
 import RadioLayout from '../../layouts/RadioLayout.astro';
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/categories?populate=*`);
+  const { data:categories } = await response.json();
+
+  return categories.map(({attributes:category}) => {
+    return {
+      params: {category: category.slug}
+    }
+  });
+}
+
+const { category } = Astro.params;
  
 const currentUrl = Astro.url;
 const path = Astro.url.pathname;
@@ -19,6 +32,13 @@ const query = qs.stringify({
         fields: ['name',  'slug']
       }
     },
+		filters: {
+			category: {
+				slug: {
+					$eq: category
+				}
+			}
+		},
 		sort: 'createdAt:DESC'
   }, {
     encodeValuesOnly: true
@@ -26,20 +46,23 @@ const query = qs.stringify({
 
 const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/${endpoint}?${query}`);
 const { data:posts } = await response.json();
+
+const postsFiltered = posts.filter(({attributes:post}) => post.category.data.attributes.slug === '');
+
+const postsToRender = postsFiltered.length === 0 ? posts : postsFiltered;
 ---
 
 <RadioLayout title={title}>
 
 	<div class="space-y-4">
-		<Filter endpoint={endpoint} currentUrl={currentUrl} currentCategory='' client:load/>
+		<Filter endpoint={endpoint} currentUrl={currentUrl} currentCategory={category} client:load/>
 	
 		<Cards>
-			{posts.map(({attributes:post}) => (
+			{postsToRender.map(({attributes:post}) => (
 					<Card 
-						key={post.id}
 						title={post.title} 
 						image={getYoutubeVideoThumbnail(post.videos[0].url, 'large')} 
-						url={path + '/' + post.slug}
+						url={path.replace(category, '') + post.slug}
 						icon={post.type}
 					/>
 				)

@@ -12,8 +12,9 @@ const { categories } = Astro.props
     <select class="select select-bordered join-item">
       <option disabled selected>Filtrar</option>
       {categories.map((category) => (
-        <option>{category}</option>
+        <option>{category.name}</option>
       ))}
     </select>
   </div>
 </div>
+

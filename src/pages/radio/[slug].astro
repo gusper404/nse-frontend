@@ -10,13 +10,12 @@ export async function getStaticPaths() {
   const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/radios?populate=*`);
   const { data:posts } = await response.json();
 
-  const slugs = posts.map(({attributes:post}) => {
+  return posts.map(({attributes:post}) => {
     return {
       params: {slug: post.slug}
     }
   });
   
-  return [...slugs];
 }
 
 const { slug } = Astro.params;
@@ -33,7 +32,8 @@ const query = qs.stringify({
       slug: {
         $eq: slug
       }
-    }
+    },
+    sort: 'createdAt:DESC'
   }, {
     encodeValuesOnly: true
   })
