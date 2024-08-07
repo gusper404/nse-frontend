@@ -1,32 +1,114 @@
 ---
 import { Icon } from 'astro-icon/components'
+import qs from 'qs'
+import youtubeThumbnail from 'youtube-thumbnail'
 import Cards from '../components/Cards.astro'
 import Card from '../components/Card.astro'
-import posts from '../mocks/posts'
+// import posts from '../mocks/posts'
 
 const { title, cta } = Astro.props;
 const [cta_label, cta_url] = cta;
+
+const query = qs.stringify({
+    fields: ['title'],
+    populate: {
+      cine: {
+        fields: ['title', 'slug'],
+        populate: {
+          videos: '*'
+        }
+      },
+      radio: {
+        fields: ['title', 'slug'],
+        populate: {
+          videos: '*'
+        }
+      },
+      tv: {
+        fields: ['title', 'slug'],
+        populate: {
+          videos: '*'
+        }
+      }
+    },
+		sort: 'createdAt:DESC'
+  }, {
+    encodeValuesOnly: true
+  })
+
+const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/sections?${query}`);
+const { data:sections } = await response.json();
 ---
+{sections.map(({attributes:section}) => {
+  
+  const radio = [...section.radio.data].map(({attributes:post}) => {
+    const { high } = youtubeThumbnail(post.videos[0].url);
+    return (
+      {
+        title: post.title,
+        image: high.url,
+        imgw: high.width,
+        imgh: high.height,
+        url: '/radio/' + post.slug,
+        icon: 'radio'
+      }
+    )
+  })
 
-<section class="my-10">
-    <div class="container">
-      <h2 class="font-semibold text-xl md:text-2xl uppercase pb-5">{title}</h2>
+  const cine = [...section.cine.data].map(({attributes:post}) => {
+    const { high } = youtubeThumbnail(post.videos[0].url);
+    return (
+      {
+        title: post.title,
+        image: high.url,
+        imgw: high.width,
+        imgh: high.height,
+        url: '/cine/' + post.slug,
+        icon: 'cine'
+      }
+    )
+  })
 
-      <Cards>
-        {posts.map((post) => (
-          <Card 
-            title={post.title} 
-            image={post.image} 
-            url={post.url}
-            icon={post.type}
-          />
-        ))}
-      </Cards>
+  const tv = [...section.tv.data].map(({attributes:post}) => {
+    const { high } = youtubeThumbnail(post.videos[0].url);
+    return (
+      {
+        title: post.title,
+        image: high.url,
+        imgw: high.width,
+        imgh: high.height,
+        url: '/tv/' + post.slug,
+        icon: 'tv'
+      }
+    )
+  })
 
-      {cta.length > 0 && (
-        <div class="pt-4 text-right">
-          <a href={cta_url} class="font-semibold inline-flex items-center gap-1 text-secondary hover:text-primary">{cta_label} <Icon name="chevron-right" class="stroke-2" /></a>
+  const posts = [...radio, ...cine, ...tv]
+  
+  return (
+    <section class="my-10">
+        <div class="container">
+          <h2 class="font-semibold text-xl md:text-2xl uppercase pb-5">{section.title}</h2>
+    
+          <Cards>
+            {posts.slice(0, 4).map((post) => (
+              <Card 
+                title={post.title} 
+                image={post.image} 
+                url={post.url}
+                icon={post.icon}
+                imgw={300}
+                imgh={200}
+              />
+            ))}
+          </Cards>
+    
+          {/* {cta.length > 0 && (
+            <div class="pt-4 text-right">
+              <a href={cta_url} class="font-semibold inline-flex items-center gap-1 text-secondary hover:text-primary">{cta_label} <Icon name="chevron-right" class="stroke-2" /></a>
+            </div>
+          )} */}
         </div>
-      )}
-    </div>
-</section>
+    </section>
+  )
+})}
