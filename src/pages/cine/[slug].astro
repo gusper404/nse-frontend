@@ -1,0 +1,70 @@
+---
+import qs from 'qs'
+import CineLayout from "../../layouts/CineLayout.astro";
+import Cards from '../../components/Cards.astro';
+import Card from '../../components/Card.astro';
+import youtubeThumbnail from 'youtube-thumbnail';
+
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/cines?populate=*`);
+  const { data:posts } = await response.json();
+
+  return posts.map(({attributes:post}) => {
+    return {
+      params: {slug: post.slug}
+    }
+  });
+  
+}
+
+const { slug } = Astro.params;
+
+const query = qs.stringify({
+    fields: ['title', 'slug'],
+    populate: {
+      videos: '*',
+      category: {
+        fields: ['name',  'slug']
+      }
+    },
+    filters: {
+      slug: {
+        $eq: slug
+      }
+    },
+    sort: 'createdAt:DESC'
+  }, {
+    encodeValuesOnly: true
+  })
+
+const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/cines?${query}`);
+const { data } = await response.json();
+const post = data[0];
+---
+<CineLayout title={post.attributes.title}>
+  <section>
+    <h1 class="text-3xl font-bold text-primary mb-5">{post.attributes.title}</h1>
+
+    <Cards>
+      {post?.attributes?.videos.map((video) => {
+          const { high } = youtubeThumbnail(video.url);
+          console.log(video)
+          return (
+            <Card 
+              key={video.id}
+              title={video.title} 
+              image={high.url}
+              imgw={high.width}
+              imgh={high.height}
+              url={video.url}
+              target="_blank"
+            />
+          )
+			  }
+      )}
+    </Cards>
+
+    <!-- <pre>{JSON.stringify(post, null, 2)}</pre> -->
+  </section>
+</CineLayout>

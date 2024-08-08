@@ -7,10 +7,10 @@ const { title } = Astro.props.frontmatter || Astro.props;
 ---
 
 <BaseLayout title={title}>
-	<section class="p-5 md:p-10 bg-primary">
+	<section class="p-5 md:p-10 bg-tertiary">
 		<div class="mx-auto max-w-[600px]">
-			<div class="flex flex-col space-y-4 items-center text-white">
-				<Icon name='radio' class='text-6xl mx-auto'/>
+			<div class="flex flex-col space-y-2 md:space-y-4 items-center text-white">
+				<Icon name='tv' class='text-4xl md:text-6xl mx-auto'/>
 				<h1 class='text-2xl font-semibold'>Televisión</h1>
 			</div>
 		</div>
@@ -21,8 +21,8 @@ const { title } = Astro.props.frontmatter || Astro.props;
       <div class="max-w-[600px] mx-auto">
         <div role="tablist" class="tabs tabs-boxed">
           <a href="/radio" role="tab" class="tab">Radio</a>
-          <a href="/radio" role="tab" class="tab bg-secondary text-white">Televisión</a>
-          <a href="/radio" role="tab" class="tab">Cine</a>
+          <a href="/tv" role="tab" class="tab bg-secondary text-white">Televisión</a>
+          <a href="/cine" role="tab" class="tab">Cine</a>
         </div>
       </div>
 

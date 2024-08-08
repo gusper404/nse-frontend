@@ -60,23 +60,25 @@ export default function Filter({ endpoint, currentUrl, currentCategory, data, pa
   }
 
   if (loading) {
-    return <div>Cargando...</div>
+    return (
+      <div className='h-12 animate-pulse bg-slate-200 rounded-md'></div>
+    )
   }
 
   return (
-    <div className="join flex">
-      <div className="w-full">
-        <div>
-          <Search data={data} path={path}/>
-        </div>
-      </div>
-      <div className="flex-none">
-        <select defaultValue={currentCategory} className="select select-bordered join-item" onChange={handleChanges}>
+    <div className="md:join flex-col md:flex-row w-full md:space-y-0 space-y-2">
+      <div className="md:flex-none">
+        <select defaultValue={currentCategory} className="select select-bordered join-item w-full" onChange={handleChanges}>
           <option disabled value=''>Filtrar</option>
           {categories.map((category) => (
             <option key={category.slug} value={category.slug}>{category.name}</option>
           ))}
         </select>
+      </div>
+      <div className="w-full">
+        <div>
+          <Search type={endpoint} data={data} path={path.replace(currentCategory, '')}/>
+        </div>
       </div>
     </div>
   )

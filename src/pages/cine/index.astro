@@ -1,29 +1,15 @@
 ---
 import qs from 'qs';
-import youtubeThumbnail from 'youtube-thumbnail';
 import Cards from '../../components/Cards.astro';
 import Card from '../../components/Card.astro';
 import Filter from '../../components/Filter.jsx';
-import RadioLayout from '../../layouts/RadioLayout.astro';
-
-export async function getStaticPaths() {
-  const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/categories?populate=*`);
-  const { data:categories } = await response.json();
-
-  return categories.map(({attributes:category}) => {
-    return {
-      params: {category: category.slug}
-    }
-  });
-}
-
-const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
-const endpoint = 'radios';
-
-const { category } = Astro.params;
+import CineLayout from '../../layouts/CineLayout.astro';
+import youtubeThumbnail from 'youtube-thumbnail';
  
 const currentUrl = Astro.url;
 const path = Astro.url.pathname;
+const title = 'NSE Cine - Nuestra Señora del Encuentro con Dios';
+const endpoint = 'cines';
 
 const query = qs.stringify({
     fields: ['title', 'slug'],
@@ -33,13 +19,6 @@ const query = qs.stringify({
         fields: ['name',  'slug']
       }
     },
-		filters: {
-			category: {
-				slug: {
-					$eq: category
-				}
-			}
-		},
 		sort: 'createdAt:DESC'
   }, {
     encodeValuesOnly: true
@@ -49,10 +28,11 @@ const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/${endpoin
 const { data:posts } = await response.json();
 ---
 
-<RadioLayout title={title}>
+<CineLayout title={title}>
 
 	<div class="space-y-4">
-		<Filter data={posts} path={path} endpoint={endpoint} currentUrl={currentUrl} currentCategory={category} client:load/>
+		<Filter data={posts} path={path} endpoint={endpoint} currentUrl={currentUrl} currentCategory='' client:load/>
+	
 		<Cards>
 			{posts.map(({attributes:post}) => {
 					const { high } = youtubeThumbnail(post.videos[0].url);
@@ -63,7 +43,7 @@ const { data:posts } = await response.json();
 							image={high.url}
 							imgw={high.width}
 							imgh={high.height}
-							url={path.replace(category, '') + post.slug}
+							url={path + '/' + post.slug}
 							icon={post.type}
 						/>
 					)
@@ -72,4 +52,4 @@ const { data:posts } = await response.json();
 		</Cards>
 	</div>
 
-</RadioLayout>
+</CineLayout>

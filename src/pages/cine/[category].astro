@@ -4,7 +4,7 @@ import youtubeThumbnail from 'youtube-thumbnail';
 import Cards from '../../components/Cards.astro';
 import Card from '../../components/Card.astro';
 import Filter from '../../components/Filter.jsx';
-import RadioLayout from '../../layouts/RadioLayout.astro';
+import CineLayout from '../../layouts/CineLayout.astro';
 
 export async function getStaticPaths() {
   const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/categories?populate=*`);
@@ -17,8 +17,8 @@ export async function getStaticPaths() {
   });
 }
 
-const title = 'NSE Radio - Nuestra Señora del Encuentro con Dios';
-const endpoint = 'radios';
+const title = 'NSE Cine - Nuestra Señora del Encuentro con Dios';
+const endpoint = 'cines';
 
 const { category } = Astro.params;
  
@@ -49,7 +49,7 @@ const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_API_URL}/${endpoin
 const { data:posts } = await response.json();
 ---
 
-<RadioLayout title={title}>
+<CineLayout title={title}>
 
 	<div class="space-y-4">
 		<Filter data={posts} path={path} endpoint={endpoint} currentUrl={currentUrl} currentCategory={category} client:load/>
@@ -72,4 +72,4 @@ const { data:posts } = await response.json();
 		</Cards>
 	</div>
 
-</RadioLayout>
+</CineLayout>
