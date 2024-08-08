@@ -49,7 +49,7 @@ const post = data[0];
     <Cards>
       {post?.attributes?.videos.map((video) => {
           const { high } = youtubeThumbnail(video.url);
-          console.log(video)
+          
           return (
             <Card 
               key={video.id}

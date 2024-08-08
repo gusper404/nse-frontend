@@ -18,6 +18,6 @@ const { image, imgw, imgh, title, url, icon, target } = Astro.props;
         <span class="text-xs uppercase">{icon === 'tv' ? 'televisión' : icon}</span>
       </div>
     )}
-    <a target={target} href={url} rel="noopener" class="font-semibold text-sm md:text-lg text-primary line-clamp-1">{title}</a>
+    <a target={target} href={url} rel="noopener" class="font-semibold text-sm md:text-base text-primary line-clamp-2">{title}</a>
   </div>
 </div>

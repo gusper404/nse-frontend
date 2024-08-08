@@ -36,6 +36,10 @@ const { data:posts } = await response.json();
 		<Cards>
 			{posts.map(({attributes:post}) => {
 					const { high } = youtubeThumbnail(post.videos[0].url);
+					const options = {
+						url: post.videos.length > 1 ? path + '/' + post.slug : post.videos[0].url,
+						target: post.videos.length > 1 ? '_self' : '_blank'
+					}
 					return (
 						<Card 
 							key={post.id}
@@ -43,7 +47,7 @@ const { data:posts } = await response.json();
 							image={high.url}
 							imgw={high.width}
 							imgh={high.height}
-							url={path + '/' + post.slug}
+							{...options}
 							icon={post.type}
 						/>
 					)
