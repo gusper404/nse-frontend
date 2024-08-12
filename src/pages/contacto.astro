@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactForm from "../components/ContactForm";
 const title = "Contacto";
 ---
 
@@ -8,11 +7,17 @@ const title = "Contacto";
   <section class="my-5 mt-10">
     <div class="container max-w-[500px] space-y-5">
       <h1 class="text-2xl md:text-3xl font-bold text-center">{title}</h1>
-      <p class="text-center">
-        ¿Tienes alguna pregunta o comentario? ¡Escríbenos!
-      </p>
+      <div class="space-y-3">
+        <h2 class="text-cl font-bold">Síguenos por nuestras redes sociales</h2>
+        <div class="flex flex-col gap-2">
+            <a class="text-blue-500 underline decoration-dashed hover:decoration-solid underline-offset-2" target="_blank" rel="noopener" href="https://www.youtube.com/user/nsetvradio">YOUTUBE</a>
+            <a class="text-blue-500 underline decoration-dashed hover:decoration-solid underline-offset-2" target="_blank" rel="noopener" href="https://www.facebook.com/nseradio">NSE RADIO FACEBOOK</a>
+            <a class="text-blue-500 underline decoration-dashed hover:decoration-solid underline-offset-2" target="_blank" rel="noopener" href="https://x.com/nseradio">NSE RADIO TWITTER</a>
+        </div>
+      </div>
+
+
       <div>
-        <ContactForm client:load/>
       </div>
     </div>
   </section>

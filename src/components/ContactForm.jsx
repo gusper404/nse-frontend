@@ -1,3 +1,4 @@
+import { Resend } from 'resend';
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form"
 import HCaptcha from '@hcaptcha/react-hcaptcha';
@@ -9,6 +10,8 @@ export default function ContactForm() {
   const [token, setToken] = useState(null)
   const captchaRef = useRef(null);
 
+  const resend = new Resend(import.meta.env.PUBLIC_RESEND_API_KEY);
+
   const {
     register,
     handleSubmit,
@@ -17,16 +20,23 @@ export default function ContactForm() {
   } = useForm()
 
   const sendEmail = async (data) => {
-
-    const response = await fetch(`https://expressjs-production-c0bb.up.railway.app/send?name=${data.name}&email=${data.email}&message=${data.message}`);
-
-    if (response.ok) {
-      console.log('Email sent');
-      setSent(true);
-    } else {
-      console.error('Error sending email');
+    try {
+      const response = await resend.emails.send({
+        from: 'info@nseinternacional.org', // Cambia esto por tu dirección de remitente
+        to: data.email,
+        subject: `Mensaje de ${data.name}`,
+        html: `<p>${data.message}</p>`,
+      });
+  
+      if (response.id) {
+        console.log('Email sent');
+        setSent(true);
+      } else {
+        console.error('Error sending email');
+      }
+    } catch (error) {
+      console.error('Error sending email', error);
     }
-
   };
 
   const onSubmit = async (data) => {
